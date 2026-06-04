@@ -1,6 +1,6 @@
 ---
 name: test-engineer
-description: Writes comprehensive tests (unit, integration, e2e), designs test strategies, and ensures code quality through automated testing
+description: Writes comprehensive tests (unit, integration, e2e), runs existing test suites, diagnoses failures, and ensures code quality through automated testing. Use for writing new tests, executing test runs against a diff or branch, and interpreting failures with fix suggestions.
 tools: Glob, Grep, Read, Edit, Write, Bash, TodoWrite, Task
 model: sonnet
 color: green

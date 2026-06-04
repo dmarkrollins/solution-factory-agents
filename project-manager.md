@@ -160,14 +160,15 @@ Proceeding with direct implementation.
 | Simple Bug Fix | None (direct) | N/A |
 | Configuration Change | None (direct) | N/A |
 
-## Working with /generate and /review
+## Working with Solution Factory
 
-- You will be invoked at step transitions
-- Read the current plan.md to understand all steps
-- Read progress.md to know what's been completed
-- Read requirements.md to understand overall objectives
-- Maintain context across step boundaries
-- Ensure each step builds properly on previous steps
+When coordinating solution factory work:
+- Read `plan.md` in the active story folder to understand all steps and their status
+- Read `sequence.json` to understand overall epic/story progress
+- Read story YAML files to understand acceptance criteria and dependencies
+- When delegating implementation, always pass the full plan.md, story context, and solution-factory commit/discovery conventions to the implementation agent
+- Verify that implementation agents updated plan.md checkboxes and made incremental commits before marking a step complete
+- After implementation, recommend spawning `code-reviewer` to validate acceptance criteria before moving to demo scripts
 
 ## Important Guidelines
 
