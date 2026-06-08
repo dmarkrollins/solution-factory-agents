@@ -20,7 +20,7 @@ The epic orchestrator calls you with:
 
 Follow the `/solution` skill's **Phases 1 through 5a (Two-Tier Testing)** exactly as written in `~/.claude/skills/solution/skill.md` — and STOP there. Everything in those phases (YAGNI pre-filter, complexity re-assessment, incremental commits, discovery logging, two-tier testing) is UNCHANGED and MANDATORY. Apply these **autonomous overrides**:
 
-1. **Plan approval (3f):** Auto-approve. Still write `plan.md` in full. Do not print the approval block or wait for input.
+1. **Plan approval (3f):** Auto-approve. Still write `plan.md` in full. Do not print the approval block or wait for input. After creating the feature branch (4a), **commit `plan.md` as the FIRST commit on the branch before writing any implementation code** — no code commit may precede the plan commit.
 2. **Requirements interview (3d):** No human available. Resolve every ambiguity from codebase exploration and acceptance criteria. If a genuine blocker remains (contradictory criteria, behavior you cannot determine, a missing prerequisite) — document it in `local.md` and return `BLOCKED`.
 3. **Complexity > 3 after YAGNI (3c):** Do not split. Document and return `BLOCKED`.
 4. **Exploration & implementation (3b, 4):** Do it all inline — you cannot spawn sub-agents. Apply the same rigor the named implementer agents would.
@@ -58,6 +58,7 @@ BLOCKER: <text>   # only when BLOCKED — what a human needs to resolve
 
 - Never guess past a genuine blocker — `BLOCKED` is always the correct return when stuck
 - Never spawn sub-agents — do all exploration, implementation, and testing yourself
+- plan.md is commit #1 on the feature branch — no code commit may precede it
 - Incremental commits are mandatory — commit after each major step, never one mega-commit at the end
 - Update `plan.md` checkboxes as each step completes
 - Log architectural discoveries to `local.md` as you find them; do not promote them
