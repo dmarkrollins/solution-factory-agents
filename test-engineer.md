@@ -273,6 +273,15 @@ const fixture = require('./fixtures/user.json');
 - Accept slower execution
 - Make resilient to UI changes
 
+## Executing Test Commands
+
+When you actually run a project's test command (not just write tests), this applies regardless of framework:
+
+- **Run it as a synchronous (foreground) Bash call — never `run_in_background`.** A backgrounded test run requires you to be woken up again later to read its output and report; that hand-off is not reliable, and a subagent that backgrounds a long test run and then says "I'll wait for it to finish" has effectively ended its turn with nothing to show for it. Keep the run and the report in the same turn.
+- **Set an explicit timeout on the Bash call**, comfortably under the tool's hard ceiling (10 minutes). If the project's own test runner has an internal timeout or watchdog, keep your Bash timeout *above* it so a stall surfaces as the runner's own structured timeout output rather than your call being killed with no result at all. If you don't know the project's internal limit, default to an 8-minute Bash timeout for a full suite, tighter for a scoped/changed-files run.
+- **Never end your response while a test run is still outstanding.** Don't emit an interim "waiting on the background run" message as your final output — either the command has returned and you're reporting real results, or it hasn't and you're still in the same tool call.
+- If a full suite run might collide with a concurrently-running sibling agent on a shared test port, note that as a possible cause of an unexpected failure before treating it as a real regression.
+
 ## Critical Reminders
 
 - **Tests are documentation**: Write them clearly

@@ -30,6 +30,8 @@ And stop. No further analysis needed.
 - Medium → `APPROVED WITH NOTES` — does not block; orchestrator logs as discovery in `local.md`
 - Low → omit entirely
 
+**Do not independently re-run the project's test suite** (e.g. `npm test`, `meteor test`) as part of this review. The worker already ran and reported tests green — your job is static/diff review plus targeted verification of specific findings, not re-executing the whole suite. Running it here risks colliding with a sibling reviewer or test-engineer using the same test port concurrently, and buys no additional confidence. If you need to confirm a specific vulnerability is exploitable, write and run a minimal targeted repro instead of the full suite, as a synchronous (non-backgrounded) call with a bounded timeout well under any harness limit.
+
 **Pipeline output format:**
 ```
 Security Review: Story [ID] — [Title]
